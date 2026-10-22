@@ -4,6 +4,7 @@ import Card from "./Card.jsx";
 function App() {
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [filter, setFilter] = useState("Todas");
   const [search, setSearch] = useState("");
   const [randomCard, setRandomCard] = useState(null);
@@ -11,9 +12,21 @@ function App() {
 
   useEffect(() => {
     setLoading(true);
+    setError(null);
+
     fetch("http://localhost:3000/api/cartas")
-      .then((res) => res.json())
-      .then((data) => setCards(data))
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setCards(data);
+      })
+      .catch((err) => {
+        setError(err.message);
+      })
       .finally(() => {
         setLoading(false);
       });
@@ -34,12 +47,16 @@ function App() {
   }
 
   return (
-    <main className="container">
+    <main>
       <h1>A minha coleção</h1>
 
-      {loading ? (
-        <p>A carregar…</p>
-      ) : (
+      {loading && <p>A carregar…</p>}
+
+      {error && !loading && (
+        <p style={{ color: "red" }}>Ocorreu um erro: {error}</p>
+      )}
+
+      {!loading && !error && (
         <>
           <p>
             Tenho {cards.length} cartas · a mostrar {visible.length}
