@@ -34,7 +34,7 @@ function App() {
   }
 
   return (
-    <main>
+    <main className="container">
       <h1>A minha coleção</h1>
 
       {loading ? (

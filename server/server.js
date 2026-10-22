@@ -47,7 +47,7 @@ app.get("/", (req, res) => {
 app.get("/sobre", (req, res) => {
   res.send(page(
     "Sobre",
-    `<p>Feito por <b>&lt;nome do aluno&gt;</b>, turma &lt;turma&gt;.</p>`
+    `<p>Feito por <b>&lt;Diogo Rodrigues&gt;</b>, turma &lt;TGPSI-T&gt;.</p>`
   ));
 });
 
