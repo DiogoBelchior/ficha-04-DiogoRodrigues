@@ -11,6 +11,11 @@ const cards = [
   { name: "Eco do Vazio", type: "Feitiço", attack: 0, defense: 0 },
 ];
 
+
+app.get('/api/cartas', (req, res) => {
+  res.json(cards);
+});
+
 function page(title, body) {
   return `<!DOCTYPE html>
 <html lang="pt">
