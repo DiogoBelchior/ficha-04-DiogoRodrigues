@@ -13,6 +13,7 @@ const cards = [
 
 
 app.get('/api/cartas', (req, res) => {
+  res.set("Access-Control-Allow-Origin", "http://localhost:5173");
   res.json(cards);
 });
 
